@@ -1,5 +1,17 @@
-INSERT INTO quote (phrase) VALUES ('Success is not final, failure is not fatal: it is the courage to continue that counts.') ON CONFLICT DO NOTHING;
-INSERT INTO quote (phrase) VALUES ('To be or not to be, that is the question.') ON CONFLICT DO NOTHING;
-INSERT INTO quote (phrase) VALUES ('The only limit to our realization of tomorrow will be our doubts of today.') ON CONFLICT DO NOTHING;
-INSERT INTO quote (phrase) VALUES ('Do what you can, with what you have, where you are.') ON CONFLICT DO NOTHING;
-INSERT INTO quote (phrase) VALUES ('It always seems impossible until it''s done.') ON CONFLICT DO NOTHING;
+TRUNCATE TABLE quote RESTART IDENTITY;
+
+INSERT INTO quote (phrase) VALUES ('«Успех — это способность шагать от одной неудачи к другой, не теряя энтузиазма.» — Уинстон Черчилль');
+INSERT INTO quote (phrase) VALUES ('«Не пиши код, который работает. Пиши код, который можно читать.»');
+INSERT INTO quote (phrase) VALUES ('«Ваше время ограничено, не тратьте его, живя чужой жизнью.» — Стив Джобс');
+INSERT INTO quote (phrase) VALUES ('«Секрет успеха — перестать говорить и начать делать.» — Уолт Дисней');
+INSERT INTO quote (phrase) VALUES ('«Искусственный интеллект не заменит разработчиков. Разработчики, использующие ИИ, заменят тех, кто им не пользуется.»');
+INSERT INTO quote (phrase) VALUES ('«Жизнь — это то, что происходит с тобой, пока ты оживлённо строишь другие планы.» — Джон Леннон');
+INSERT INTO quote (phrase) VALUES ('«Если тебе тяжело, значит ты поднимаешься в гору. Если легко — летишь в пропасть.» — Генри Форд');
+INSERT INTO quote (phrase) VALUES ('«Логика проведёт вас от А до Я. Воображение доставит вас куда угодно.» — Альберт Эйнштейн');
+INSERT INTO quote (phrase) VALUES ('«Любой дурак может написать код, понятный компьютеру. Хорошие программисты пишут код, понятный людям.» — Мартин Фаулер');
+INSERT INTO quote (phrase) VALUES ('«Сложнее всего начать действовать. Все остальное зависит только от упорства.» — Амелия Эрхарт');
+INSERT INTO quote (phrase) VALUES ('«Тот, кто не рискует, в конечном счёте рискует в 100 раз больше.» — Марк Цукерберг');
+INSERT INTO quote (phrase) VALUES ('«Успех обычно приходит к тем, кто слишком занят, чтобы его искать.» — Генри Дэвид Торо');
+INSERT INTO quote (phrase) VALUES ('«Работа над хорошим кодом как создание хорошей прозы: вам нужен черновик, который вы потом доведёте до ума к релизу.»');
+INSERT INTO quote (phrase) VALUES ('«Неудача — это просто возможность начать снова, но уже более мудро.» — Генри Форд');
+INSERT INTO quote (phrase) VALUES ('«Безумие: делать одно и то же снова и снова, ожидая разных результатов.» — Альберт Эйнштейн');
