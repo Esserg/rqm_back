@@ -1,0 +1,56 @@
+name: CI/CD Backend Pipeline
+
+# 1. Триггер запуска
+on:
+  push:
+    branches:
+      - main # Пайплайн сработает автоматически при любом push или merge в ветку main
+
+jobs:
+  build-and-push:
+    # 2. Привязка к вашему локальному раннеру в K8s
+    runs-on: [self-hosted, rqm-backend]
+
+    steps:
+      # Шаг 1: Клонирование кода репозитория внутрь контейнера раннера
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Шаг 2: Кэширование папки .m2 (зависимостей Maven)
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Шаг 3: Развертывание среды Java 21 внутри раннера
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # Шаг 4: Компиляция Java-кода и сборка JAR-архива
+      - name: Build JAR package with Maven
+        run: ./mvnw clean package -DskipTests
+
+      # Шаг 5: Сборка Docker-образа и отправка в локальный registry
+      - name: Build and Push Docker Image
+        run: |
+          # Переменные для удобства
+          REGISTRY_URL="docker-registry.home.local"
+          IMAGE_NAME="rqm-backend"
+          IMAGE_TAG="${{ github.sha }}" # Используем уникальный хэш коммита в качестве тега
+          
+          echo "==== Сборка Docker-образа ===="
+          docker build -t $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG .
+          
+          echo "==== Пуш образа в локальный Registry ===="
+          docker push $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG
+          
+          echo "==== Создание и пуш тега latest ===="
+          docker tag $REGISTRY_URL/$IMAGE_NAME:$IMAGE_TAG $REGISTRY_URL/$IMAGE_NAME:latest
+          docker push $REGISTRY_URL/$IMAGE_NAME:latest
