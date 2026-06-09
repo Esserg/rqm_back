@@ -1,20 +1,14 @@
+# Основной файл конфигурации (общие настройки для всех сред)
+spring:
+  profiles:
+    active: dev
+    # Активный профиль можно переопределить через переменную окружения: -Dspring.profiles.active=prod
+
 server:
   port: 8080
 
-spring:
-  datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:random_quote_machine}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:postgres}
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-  sql:
-    init:
-      mode: always
+# Логирование
+logging:
+  level:
+    root: INFO
+    com.randomquote: DEBUG
