@@ -1,5 +1,3 @@
-TRUNCATE TABLE quote RESTART IDENTITY;
-
 INSERT INTO quote (phrase) VALUES ('«Успех — это способность шагать от одной неудачи к другой, не теряя энтузиазма.» — Уинстон Черчилль');
 INSERT INTO quote (phrase) VALUES ('«Не пиши код, который работает. Пиши код, который можно читать.»');
 INSERT INTO quote (phrase) VALUES ('«Ваше время ограничено, не тратьте его, живя чужой жизнью.» — Стив Джобс');
